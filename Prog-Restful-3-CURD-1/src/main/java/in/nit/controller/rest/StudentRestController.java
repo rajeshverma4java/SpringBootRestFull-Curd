@@ -1,4 +1,4 @@
-package in.nit.controller;
+package in.nit.controller.rest;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,8 +24,12 @@ public class StudentRestController {
 	@Autowired
 	private IStudentService service;
 
-	@PostMapping
-	public ResponseEntity<String> saveStudent(@RequestBody Student student){
+	
+	//1. save Operation
+	
+	@PostMapping("/save")
+	public ResponseEntity<String> saveStudent(
+			@RequestBody Student student){
 
 		ResponseEntity<String> resp=null;
 		try {
@@ -41,8 +45,9 @@ public class StudentRestController {
 		return resp;
 	}
 
-
-	@GetMapping
+	//2. Get All Student Report
+	
+	@GetMapping("/all")
 	public ResponseEntity<?> getAllStudent(){
 
 		ResponseEntity<?> resp=null;
@@ -67,6 +72,8 @@ public class StudentRestController {
 		return resp;
 	}
 
+	//3. Get One Student Detail
+	
 	@GetMapping("/one/{id}")
 	public ResponseEntity<?> getOneStudent(@PathVariable Integer id){
 
@@ -87,6 +94,10 @@ public class StudentRestController {
 
 		return resp;
 	}
+	
+	
+	//4. Delete Student by Id
+	
 	@DeleteMapping("/remove/{id}")
 	public ResponseEntity<String> deleteStudent(@PathVariable Integer id){
 		ResponseEntity<String> resp=null;
@@ -108,6 +119,9 @@ public class StudentRestController {
 		}
 		return resp;
 	}
+	
+	//5. update record
+	
 	@PutMapping("/update")
 	public ResponseEntity<String> updateStudent(@RequestBody Student student){
 		ResponseEntity<String> resp=null;
